@@ -55,7 +55,7 @@ Probably not strictly needed but checking result can verify that the sync module
 Arm the given network (start recording/reporting motion events)
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login" --data-binary "" --compressed >https://prod.immedia-semi.com/network/*network_id_from_networks_call*/arm
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login" --data-binary "" --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/arm
 
 **Response:**
 JSON response containing information about the arm command request, including the command/request ID
@@ -68,7 +68,7 @@ When this call returns, it does not mean the arm request is complete,  the clien
 Disarm the given network (stop recording/reporting motion events)
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary "" --compressed >https://prod.immedia-semi.com/network/*network_id_from_networks_call*/disarm
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary "" --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/disarm
 
 **Response:**
 JSON response containing information about the disarm command request, including the command/request ID
@@ -82,7 +82,7 @@ When this call returns, it does not mean the disarm request is complete,  the cl
 Get status info on the given command
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed >https://prod.immedia-semi.com/network/*network_id*/command/*command_id*
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/network/*network_id*/command/*command_id*
 
 **Response:**
 JSON response containing state information of the given command, most notably whether it has completed and was successful.
@@ -103,4 +103,31 @@ JSON response containing information that the mobile client displays on the home
 **Notes:**
 Not necessary to as part of issuing arm/disarm commands, but contains good summary info.
 
+## Events, thumbnails & video captures
 
+**Request**
+Get events for a given network (sync module) -- Need network ID from home 
+
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/events/network/*network__id*
+
+**Response**
+A json list of evets incluing URL's.   Replace the "mp4" with "jpg" extension to get the thumbnail of each clip
+
+
+**Request**
+Get a video clip from the events list
+
+**Request**
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed **video url from events list.mp4** > video.mp4
+
+**Response**
+The mp4 video
+
+**Request**
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed **video url from events list.jpg** > video_thumb.jpg
+
+**Response**
+The jpg bytes. 
+
+**Notes**
+Note that you replace the 'mp4' with a 'jpg' to get the thumbnail
