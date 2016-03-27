@@ -41,7 +41,7 @@ Network ID is needed to issue arm/disarm calls
 Obtain information about the Blink Sync Modules on the given network.
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed >https://prod.immedia-semi.com/network/*network_id_from_networks_call*/syncmodules
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/syncmodules
 
 **Response:**
 JSON response containing information about the known state of the Sync module, most notably if it is online
@@ -55,7 +55,7 @@ Probably not strictly needed but checking result can verify that the sync module
 Arm the given network (start recording/reporting motion events)
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login" --data-binary "" --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/arm
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login* --data-binary "" --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/arm
 
 **Response:**
 JSON response containing information about the arm command request, including the command/request ID
@@ -117,13 +117,14 @@ A json list of evets incluing URL's.   Replace the "mp4" with "jpg" extension to
 **Request**
 Get a video clip from the events list
 
-**Request**
 >curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed **video url from events list.mp4** > video.mp4
 
 **Response**
 The mp4 video
 
 **Request**
+Get a thumnail from the events list
+
 >curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed **video url from events list.jpg** > video_thumb.jpg
 
 **Response**
