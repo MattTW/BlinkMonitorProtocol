@@ -91,11 +91,7 @@ JSON response containing state information of the given command, most notably wh
 After an arm/disarm command, the client appears to poll this URL every second or so until the response indicates the command is complete.
 
 **Known Commands:**
-lv_relay
-arm
-disarm
-thumbnail
-clip
+lv_relay, arm, disarm, thumbnail, clip
 
 ##Home Screen
 
