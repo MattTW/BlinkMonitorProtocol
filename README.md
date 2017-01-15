@@ -228,6 +228,25 @@ Gets camera sensor information
 **Response**
 JSON response containing camera sensor information, such as wifi strength, temperature, and battery level
 
+**Request**
+Enables motion detection for one camera
+
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: $auth_token" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/enable
+
+**Response**
+JSON response containing camera information
+
+**Request**
+Disables motion detection for one camera
+
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: $auth_token" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/disable
+
+**Response**
+JSON response containing camera information
+
+*Note*: enabling or disabling motion detection is independent of arming or disarming the system.  No motion detection or video recording will take place unless the system is armed.
+
+
 ##Miscellaneous
 
 **Request**
