@@ -6,7 +6,7 @@ import os
 import sys
 
 if len(sys.argv) != 3:
-    print 'usage: ' + sys.argv[0] + ' email password'
+    print('usage: ' + sys.argv[0] + ' email password')
     exit()
 
 headers = {
@@ -16,7 +16,7 @@ headers = {
 data = '{ "password" : "' + sys.argv[2] + '", "client_specifier" : "iPhone 9.2 | 2.2 | 222", "email" : "' + sys.argv[1] + '" }'
 res = requests.post('https://prod.immedia-semi.com/login', headers=headers, data=data)
 authToken = res.json()["authtoken"]["authtoken"]
-print authToken
+print(authToken)
 
 headers = {
     'Host': 'prod.immedia-semi.com',
@@ -26,14 +26,14 @@ headers = {
 pageNum = 0
 while True:
     pageNumUrl = 'https://prod.immedia-semi.com/api/v2/videos/page/' + str(pageNum)
-    print pageNumUrl
+    print(pageNumUrl)
     res = requests.get(pageNumUrl, headers=headers)
     videoListJson = res.json()
     if not videoListJson:
         break
     for videoJson in videoListJson:
         mp4Url = 'https://prod.immedia-semi.com' + videoJson["address"]
-        print mp4Url
+        print(mp4Url)
         res = requests.get(mp4Url, headers=headers, stream=True)
         with open(os.path.basename(mp4Url)[14:], 'wb') as out_file:
             shutil.copyfileobj(res.raw, out_file)
