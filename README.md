@@ -5,7 +5,7 @@ I am not affiliated with the company in any way - this documentation is strictly
 
 The Client API is a straightforward REST API using JSON and HTTPS.
 
-##Login
+## Login
 
 Client login to the Blink Servers.
 
@@ -22,7 +22,7 @@ Client login to the Blink Servers.
 **Notes:**
 The authtoken value is passed in a header in future calls.
 
-##Networks
+## Networks
 
 Obtain information about the Blink networks defined for the logged in user.
 
@@ -36,7 +36,7 @@ JSON response containing information including Network ID and Account ID.
 Network ID is needed to issue arm/disarm calls
 
 
-##Sync Modules
+## Sync Modules
 
 Obtain information about the Blink Sync Modules on the given network.
 
@@ -50,8 +50,8 @@ JSON response containing information about the known state of the Sync module, m
 Probably not strictly needed but checking result can verify that the sync module is online and will respond to requests to arm/disarm, etc.
 
 
-##Arm
-
+## Arm
+ 
 Arm the given network (start recording/reporting motion events)
 
 **Request:**
@@ -63,7 +63,7 @@ JSON response containing information about the arm command request, including th
 **Notes:**
 When this call returns, it does not mean the arm request is complete,  the client must gather the request ID from the response and poll for the status of the command.
 
-##Disarm
+## Disarm
 
 Disarm the given network (stop recording/reporting motion events)
 
@@ -77,7 +77,7 @@ JSON response containing information about the disarm command request, including
 When this call returns, it does not mean the disarm request is complete,  the client must gather the request ID from the response and poll for the status of the command.
 
 
-##Command Status
+## Command Status
 
 Get status info on the given command
 
@@ -93,7 +93,7 @@ After an arm/disarm command, the client appears to poll this URL every second or
 **Known Commands:**
 lv_relay, arm, disarm, thumbnail, clip
 
-##Home Screen
+## Home Screen
 
 Return information displayed on the home screen of the mobile client
 
@@ -106,7 +106,7 @@ JSON response containing information that the mobile client displays on the home
 **Notes:**
 Not necessary to as part of issuing arm/disarm commands, but contains good summary info.
 
-##Events, thumbnails & video captures
+## Events, thumbnails & video captures
 
 **Request**
 Get events for a given network (sync module) -- Need network ID from home 
@@ -152,7 +152,7 @@ Captures a new video for a camera
 **Response**
 Command information.
 
-##Video Information
+## Video Information
 
 **Request**
 Get the total number of videos in the system
@@ -202,7 +202,7 @@ Deletes all videos
 **Response**
 Unknown - not tested
 
-##Cameras
+## Cameras
 
 **Request**
 Gets a list of cameras
@@ -247,7 +247,7 @@ JSON response containing camera information
 *Note*: enabling or disabling motion detection is independent of arming or disarming the system.  No motion detection or video recording will take place unless the system is armed.
 
 
-##Miscellaneous
+## Miscellaneous
 
 **Request**
 Gets information about devices that have connected to the blink service
