@@ -14,20 +14,25 @@ Client login to the Blink Servers.
 >  "password" : "*your blink password*",
 >  "client_specifier" : "iPhone 9.2 | 2.2 | 222",
 >  "email" : "*your blink login/email*"
->}' --compressed https://prod.immedia-semi.com/login
+>}' --compressed https://rest.prod.immedia-semi.com/login
 
 **Response:**
->{"authtoken":{"authtoken":"*an auth token*","message":"auth"}}
+>{"authtoken":{"authtoken":"*an auth token*","message":"auth"},"networks":{"*network id*":{"name":"*name*","onboarded":true}},"region":{"*regioncode for endpoint*":"*region name"}}
 
 **Notes:**
 The authtoken value is passed in a header in future calls.
+The region code for endpoint is required to form the URL of the REST endpoint for future calls.
+Depending on the region you are registered you will need to change the REST endpoints below:
+- from `https://rest.prod.immedia-semi.com`
+- to `https://rest.prde.immedia-semi.com` if e.g. your device is registered in Germany
+Please note that at this moment it seems that all regions are not implemented equally: not all endpoints are available in all regions
 
 ## Networks
 
 Obtain information about the Blink networks defined for the logged in user.
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/networks
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/networks
 
 **Response:**
 JSON response containing information including Network ID and Account ID.
@@ -41,7 +46,7 @@ Network ID is needed to issue arm/disarm calls
 Obtain information about the Blink Sync Modules on the given network.
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/syncmodules
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/network/*network_id_from_networks_call*/syncmodules
 
 **Response:**
 JSON response containing information about the known state of the Sync module, most notably if it is online
@@ -55,7 +60,7 @@ Probably not strictly needed but checking result can verify that the sync module
 Arm the given network (start recording/reporting motion events)
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/arm
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://rest.prod.immedia-semi.com/network/*network_id_from_networks_call*/arm
 
 **Response:**
 JSON response containing information about the arm command request, including the command/request ID
@@ -68,7 +73,7 @@ When this call returns, it does not mean the arm request is complete,  the clien
 Disarm the given network (stop recording/reporting motion events)
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id_from_networks_call*/disarm
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://rest.prod.immedia-semi.com/network/*network_id_from_networks_call*/disarm
 
 **Response:**
 JSON response containing information about the disarm command request, including the command/request ID
@@ -82,7 +87,7 @@ When this call returns, it does not mean the disarm request is complete,  the cl
 Get status info on the given command
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/network/*network_id*/command/*command_id*
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/network/*network_id*/command/*command_id*
 
 **Response:**
 JSON response containing state information of the given command, most notably whether it has completed and was successful.
@@ -98,7 +103,7 @@ lv_relay, arm, disarm, thumbnail, clip
 Return information displayed on the home screen of the mobile client
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/homescreen
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/homescreen
 
 **Response:**
 JSON response containing information that the mobile client displays on the home page, including:  status, armed state, links to thumbnails for each camera, etc.
@@ -111,7 +116,7 @@ Not necessary to as part of issuing arm/disarm commands, but contains good summa
 **Request**
 Get events for a given network (sync module) -- Need network ID from home 
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/events/network/*network__id*
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/events/network/*network__id*
 
 **Response**
 A json list of evets incluing URL's.   Replace the "mp4" with "jpg" extension to get the thumbnail of each clip
@@ -139,7 +144,7 @@ Note that you replace the 'mp4' with a 'jpg' to get the thumbnail
 **Request**
 Captures a new thumbnail for a camera
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/thumbnail
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://rest.prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/thumbnail
 
 **Response**
 Command information. 
@@ -147,7 +152,7 @@ Command information.
 **Request**
 Captures a new video for a camera
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/clip
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://rest.prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/clip
 
 **Response**
 Command information.
@@ -157,7 +162,7 @@ Command information.
 **Request**
 Get the total number of videos in the system
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/api/v2/videos/count
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/api/v2/videos/count
 
 **Response**
 JSON response containing the total video count.
@@ -165,7 +170,7 @@ JSON response containing the total video count.
 **Request**
 Gets a paginated set of video information
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/api/v2/videos/page/0
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/api/v2/videos/page/0
 
 **Response**
 JSON response containing a set of video information, including: camera name, creation time, thumbnail URI, size, length
@@ -173,7 +178,7 @@ JSON response containing a set of video information, including: camera name, cre
 **Request**
 Gets information for a specific video by ID
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/api/v2/video/*video_id*
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/api/v2/video/*video_id*
 
 **Response**
 JSON response containing video information
@@ -181,7 +186,7 @@ JSON response containing video information
 **Request**
 Gets a list of unwatched videos
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/api/v2/videos/unwatched
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/api/v2/videos/unwatched
 
 **Response**
 JSON response containing unwatched video information
@@ -189,7 +194,7 @@ JSON response containing unwatched video information
 **Request**
 Deletes a video
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://prod.immedia-semi.com/api/v2/video/*video_id*/delete
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://rest.prod.immedia-semi.com/api/v2/video/*video_id*/delete
 
 **Response**
 Unknown - not tested
@@ -197,7 +202,7 @@ Unknown - not tested
 **Request**
 Deletes all videos
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://prod.immedia-semi.com/api/v2/videos/deleteall
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --data-binary --compressed https://rest.prod.immedia-semi.com/api/v2/videos/deleteall
 
 **Response**
 Unknown - not tested
@@ -207,7 +212,7 @@ Unknown - not tested
 **Request**
 Gets a list of cameras
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/network/*network_id*/cameras
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/network/*network_id*/cameras
 
 **Response**
 JSON response containing camera information
@@ -215,7 +220,7 @@ JSON response containing camera information
 **Request**
 Gets information for one camera
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/network/*network_id*/camera/*camera_id*
 
 **Response**
 JSON response containing camera information
@@ -223,7 +228,7 @@ JSON response containing camera information
 **Request**
 Gets camera sensor information
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/signals
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/signals
 
 **Response**
 JSON response containing camera sensor information, such as wifi strength, temperature, and battery level
@@ -231,7 +236,7 @@ JSON response containing camera sensor information, such as wifi strength, tempe
 **Request**
 Enables motion detection for one camera
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: $auth_token" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/enable
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: $auth_token" --data-binary --compressed https://rest.prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/enable
 
 **Response**
 JSON response containing camera information
@@ -239,7 +244,7 @@ JSON response containing camera information
 **Request**
 Disables motion detection for one camera
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: $auth_token" --data-binary --compressed https://prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/disable
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: $auth_token" --data-binary --compressed https://rest.prod.immedia-semi.com/network/*network_id*/camera/*camera_id*/disable
 
 **Response**
 JSON response containing camera information
@@ -252,7 +257,7 @@ JSON response containing camera information
 **Request**
 Gets information about devices that have connected to the blink service
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/account/clients
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/account/clients
 
 **Response**
 JSON response containing client information, including: type, name, connection time, user ID
@@ -260,7 +265,7 @@ JSON response containing client information, including: type, name, connection t
 **Request**
 Gets information about supported regions
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/regions
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/regions
 
 **Response**
 JSON response containing region information
@@ -268,7 +273,7 @@ JSON response containing region information
 **Request**
 Gets information about system health
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/health
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/health
 
 **Response**
 "all ports tested are open"
@@ -276,7 +281,7 @@ Gets information about system health
 **Request**
 Gets information about programs
 
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://prod.immedia-semi.com/api/v1/networks/*network_id*/programs
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/api/v1/networks/*network_id*/programs
 
 **Response**
 Unknown.
