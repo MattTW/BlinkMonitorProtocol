@@ -14,7 +14,7 @@ headers = {
     'Content-Type': 'application/json',
 }
 data = '{ "password" : "' + sys.argv[2] + '", "client_specifier" : "iPhone 9.2 | 2.2 | 222", "email" : "' + sys.argv[1] + '" }'
-res = requests.post('https://prod.immedia-semi.com/login', headers=headers, data=data)
+res = requests.post('https://rest.prod.immedia-semi.com/login', headers=headers, data=data)
 authToken = res.json()["authtoken"]["authtoken"]
 print(authToken)
 
