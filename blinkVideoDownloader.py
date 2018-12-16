@@ -39,6 +39,6 @@ while True:
         mp4Url = 'https://rest-'+region+'.immedia-semi.com' + videoJson["address"]
         print(mp4Url)
         res = requests.get(mp4Url, headers=headers, stream=True)
-        with open(os.path.basename(mp4Url)[14:], 'wb') as out_file:
+        with open(os.path.basename(mp4Url)[10:], 'wb') as out_file:
             shutil.copyfileobj(res.raw, out_file)
     pageNum += 1
