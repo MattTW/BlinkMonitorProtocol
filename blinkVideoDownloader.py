@@ -36,11 +36,12 @@ headers = {
 fileFormat = "%Y-%m-%d %H-%M-%S"
 pageNum = 1  # Page actually appear to start at one
 while True:
-    pageNumUrl = 'https://rest-'+region+'.immedia-semi.com/api/v2/videos/page/' + str(pageNum)
+    pageNumUrl = 'https://rest-'+region+'.immedia-semi.com/api/v2/videos/changed?since=2016-01-01T23:11:21+0000&page=' + str(pageNum)
     print("## Processing page - " + str(pageNum) + " ##")
     res = requests.get(pageNumUrl, headers=headers)
-    videoListJson = res.json()
+    videoListJson = res.json()["videos"]
     if not videoListJson:
+        print(" * ALL DONE !! *")
         break
     for videoJson in videoListJson:
         # print(json.dumps(videoJson, indent=4, sort_keys=True))
