@@ -1,3 +1,5 @@
+As forked from MattTW's master page:
+
 # BlinkMonitorProtocol
 Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System.
 
