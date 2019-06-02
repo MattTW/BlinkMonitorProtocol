@@ -5,6 +5,7 @@ import shutil
 import os
 import sys
 import json
+import time
 
 from datetime import datetime
 import pytz
@@ -33,29 +34,32 @@ headers = {
     'TOKEN_AUTH': authToken,
 }
 
+network = res.json()["networks"]
+accountID = list(network.keys())[0]
+print("Account - " + accountID)
+
 fileFormat = "%Y-%m-%d %H-%M-%S"
-pageNum = 1  # Page actually appear to start at one
+pageNum = 1
 while True:
-    pageNumUrl = 'https://rest-'+region+'.immedia-semi.com/api/v2/videos/changed?since=2016-01-01T23:11:21+0000&page=' + str(pageNum)
+    time.sleep(0.25)
+    pageNumUrl = 'https://rest-'+region+'.immedia-semi.com/api/v1/accounts/'+accountID+'/media/changed?since=2019-04-19T23:11:20+0000&page=' + str(pageNum)
     print("## Processing page - " + str(pageNum) + " ##")
     res = requests.get(pageNumUrl, headers=headers)
-    videoListJson = res.json()["videos"]
+    videoListJson = res.json()["media"]
     if not videoListJson:
         print(" * ALL DONE !! *")
         break
     for videoJson in videoListJson:
         # print(json.dumps(videoJson, indent=4, sort_keys=True))
-        mp4Url = 'https://rest-'+region+'.immedia-semi.com' + videoJson["address"]
+        mp4Url = 'https://rest-'+region+'.immedia-semi.com' + videoJson["media"]
         datetime_object = datetime.strptime(videoJson["created_at"], '%Y-%m-%dT%H:%M:%S+00:00')
         utcmoment = datetime_object.replace(tzinfo=pytz.utc)
         localDatetime = utcmoment.astimezone(pytz.timezone(videoJson["time_zone"]))
-        fileName = localDatetime.strftime(fileFormat) + " - " + videoJson["camera_name"] + " - " + videoJson["network_name"] + ".mp4"
+        fileName = localDatetime.strftime(fileFormat) + " - " + videoJson["device_name"] + " - " + videoJson["network_name"] + ".mp4"
 
         if os.path.isfile(fileName):
             print(" * Skipping " + fileName + " *")
-            # print("Already downloaded (diff : " + str((int(videoJson["size"])-os.path.getsize(fileName))) + " bytes)")
         else:
-            # print("Downloading - " + mp4Url)
             print("Saving - " + fileName)
             res = requests.get(mp4Url, headers=headers, stream=True)
             with open("tmp-download", 'wb') as out_file:
