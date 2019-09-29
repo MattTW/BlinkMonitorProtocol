@@ -21,7 +21,7 @@ headers = {
     'Content-Type': 'application/json',
 }
 data = '{ "password" : "' + sys.argv[2] + '", "client_specifier" : "iPhone 9.2 | 2.2 | 222", "email" : "' + sys.argv[1] + '" }'
-res = requests.post('https://rest.prod.immedia-semi.com/login', headers=headers, data=data)
+res = requests.post('https://rest.prod.immedia-semi.com/api/v2/login', headers=headers, data=data)
 authToken = res.json()["authtoken"]["authtoken"]
 region = res.json()["region"]
 region = list(region.keys())[0]
@@ -35,7 +35,7 @@ headers = {
 }
 
 network = res.json()["networks"]
-accountID = list(network.keys())[0]
+accountID = str(res.json()["account"]["id"])
 print("Account - " + accountID)
 
 fileFormat = "%Y-%m-%d %H-%M-%S"
