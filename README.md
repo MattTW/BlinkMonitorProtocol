@@ -14,10 +14,12 @@ Client login to the Blink Servers.
 >  "password" : "*your blink password*",
 >  "client_specifier" : "iPhone 9.2 | 2.2 | 222",
 >  "email" : "*your blink login/email*"
->}' --compressed https://rest.prod.immedia-semi.com/login
+>}' --compressed https://rest.prod.immedia-semi.com/api/v2/login
 
 **Response:**
->{"authtoken":{"authtoken":"*an auth token*","message":"auth"},"networks":{"*network id*":{"name":"*name*","onboarded":true}},"region":{"*regioncode for endpoint*":"*region name"}}
+>{ "account": { "id": "*an account number*" },
+"client": { "id" : "*a client id*" },
+"authtoken":{"authtoken":"*an auth token*","message":"auth"},"networks":{"*network id*":{"name":"*name*","onboarded":true}},"region":{"*regioncode for endpoint*":"*region name"}}
 
 **Notes:**
 The authtoken value is passed in a header in future calls.
@@ -100,13 +102,13 @@ lv_relay, arm, disarm, thumbnail, clip
 
 ## Home Screen
 
-Return information displayed on the home screen of the mobile client
+Return information displayed on the home screen of the mobile client - supports multiple sync modules.
 
 **Request:**
->curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/homescreen
+>curl -H "Host: prod.immedia-semi.com" -H "TOKEN_AUTH: *authtoken from login*" --compressed https://rest.prod.immedia-semi.com/network/*network_id_from_networks_call*/homescreen
 
 **Response:**
-JSON response containing information that the mobile client displays on the home page, including:  status, armed state, links to thumbnails for each camera, etc.
+JSON response containing information that the mobile client displays on the home page for the requested sync module, including:  status, armed state, links to thumbnails for each camera, etc.
 
 **Notes:**
 Not necessary to as part of issuing arm/disarm commands, but contains good summary info.
