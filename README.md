@@ -14,7 +14,7 @@ Client login to the Blink Servers.
 >  "password" : "*your blink password*",
 >  "client_specifier" : "iPhone 9.2 | 2.2 | 222",
 >  "email" : "*your blink login/email*"
->}' --compressed https://rest.prod.immedia-semi.com/api/v2/login
+>}' --compressed https://rest-prod.immedia-semi.com/api/v4/account/login
 
 **Response:**
 >{ "account": { "id": "*an account number*" },
