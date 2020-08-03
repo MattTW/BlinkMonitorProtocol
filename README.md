@@ -1,9 +1,76 @@
 # BlinkMonitorProtocol
 Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System.
 
-I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**.  My goal was to uncover enough to arm and disarm the system programatically so that I can issue those commands in sync with my home alarm system arm/disarm.  Just some raw notes at this point but should be enough for creating programmatic APIs.    Lots more to be discovered and documented - feel free to contribute!
+I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**. Blink/Amazon is known to make breaking changes. These APIs are current for the current iOS app as of 8/3/2020.  PR's welcome!  
 
-The Client API is a straightforward REST API using JSON and HTTPS.
+The bootstrap server URL is https://rest-prod.immedia-semi.com - see [Login](authentication.md) for notes on where you may be directed to a local server after login.
+
+## Authentication
+
+* [Login](authentication.md) : `POST /api/v4/account/login`
+* [Logout](authentication.md) : `POST /api/v4/account/{$AccountID}/client/{$clientID}/logout`
+* Verify Pin : `POST /api/v4/account/${AccountID}/client/{$ClientID}/pin/verify`
+
+## General
+* Command Status : `GET /network/{$NetworkID}/command/{$CommandID}`
+* Version : `GET /api/v1/version`
+* Regions : `GET /regions` (?locale=US)
+* Upload Logs
+* Networks - deprecated?
+* Synch Modules - deprecated?
+* System Health - deprecated?
+* Clients - deprecated? 
+
+## System
+* HomeScreen : `GET /api/v3/accounts/{$AccountID}/homescreen`
+* General Options (app options screen)
+* Generic Options Call
+* Notification Flags/Config
+
+## Network (Synch Module)
+* Arm System (motion detect all cameras in system)
+* Disarm System
+* List Network Programs : `GET /api/v1/networks/{$NetworkID}/programs`
+* Enable Network Program
+* Disable Network Program
+
+## Cameras
+* Enable Motion Detection
+* Disable Motion Detection
+* Get Current Thumbnail
+* Create New Thumbnail
+* Liveview
+* Get Camera Config
+* Update Camera Config
+* Capture Clip - deprecated?
+* Camera Signals (battery, wifi, etc) - deprecated?
+
+## Videos
+* Video Options
+* Get Media events ("changed since" filter) : `GET /api/v1/accounts/{$AccountID}/media/changed` (?since=2020-08-03T16:50:24+0000&page=1) (?since=1970-01-01T00:00:00+0000&page=1)
+* Get Network events - deprecated?
+* Paginated list, etc - deprecated?
+
+
+
+### Current User related
+
+Each endpoint manipulates or displays information related to the User whose
+Token is provided with the request:
+
+* [Show info](user/get.md) : `GET /api/user/`
+* [Update info](user/put.md) : `PUT /api/user/`
+
+### Account related
+
+Endpoints for viewing and manipulating the Accounts that the Authenticated User
+has permissions to access.
+
+* [Show Accessible Accounts](accounts/get.md) : `GET /api/accounts/`
+* [Create Account](accounts/post.md) : `POST /api/accounts/`
+* [Show An Account](accounts/pk/get.md) : `GET /api/accounts/:pk/`
+* [Update An Account](accounts/pk/put.md) : `PUT /api/accounts/:pk/`
+* [Delete An Account](accounts/pk/delete.md) : `DELETE /api/accounts/:pk/`
 
 ## Login
 
