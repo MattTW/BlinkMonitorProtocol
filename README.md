@@ -30,8 +30,8 @@ The authtoken value is passed in a header in future calls.
 Network info including ID is no longer returned in this call and can be feteched in a downstream call such as homepage.
 The region tier for endpoint is required to form the URL of the REST endpoint for future calls.
 Depending on the region you are registered you will need to change the REST endpoints below:
-- from `https://rest.prod.immedia-semi.com`
-- to `https://rest.prde.immedia-semi.com` if e.g. your device is registered in Germany
+- from `https://rest-prod.immedia-semi.com`
+- to `https://rest-prde.immedia-semi.com` if e.g. your device is registered in Germany
 Please note that at this moment it seems that all regions are not implemented equally: not all endpoints are available in all regions
 
 ## Networks
