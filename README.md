@@ -19,11 +19,16 @@ Client login to the Blink Servers.
 **Response:**
 >{ "account": { "id": "*an account number*" },
 "client": { "id" : "*a client id*" },
-"authtoken":{"authtoken":"*an auth token*","message":"auth"},"networks":{"*network id*":{"name":"*name*","onboarded":true}},"region":{"*regioncode for endpoint*":"*region name"}}
+"authtoken":{"authtoken":"*an auth token*","message":"auth"}, "region": {
+    "tier": "*region tier, e.g. prod*",
+    "description": "*full text description of region*",
+    "code": "*short region code*"
+  }}
 
 **Notes:**
 The authtoken value is passed in a header in future calls.
-The region code for endpoint is required to form the URL of the REST endpoint for future calls.
+Network info including ID is no longer returned in this call and can be feteched in a downstream call such as homepage.
+The region tier for endpoint is required to form the URL of the REST endpoint for future calls.
 Depending on the region you are registered you will need to change the REST endpoints below:
 - from `https://rest.prod.immedia-semi.com`
 - to `https://rest.prde.immedia-semi.com` if e.g. your device is registered in Germany
