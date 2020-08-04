@@ -1,46 +1,52 @@
 # BlinkMonitorProtocol
 Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System.
 
-I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**. Blink/Amazon is known to make breaking changes. These APIs are current for the current iOS app as of 8/3/2020.  PR's welcome!  
+I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**. 
 
-The bootstrap server URL is https://rest-prod.immedia-semi.com - see [Login](authentication.md) for notes on where you may be directed to a local server after login.
+Blink/Amazon appears to keep previous versions of APIs running until mobile clients are forced to upgrade - APIs can and have been obsoleted.  As unofficial doc, we get no deprecation warning.  When APIs no longer appear in the current versions of the mobile Apps, we assume they are deprecated and mark them as such in this doc. PR's welcome!  
 
-## Authentication
+## Overview
+
+* The bootstrap server URL:  https://rest-prod.immedia-semi.com
+    * see [Login](authentication.md) for notes on possible redirection to a local server after login.
+* **Auth Token** - authentication of API calls is done by passing a TOKEN_AUTH header.  The auth token is provided in the response to a successful login.
+* **Account** - An account corresponds single login/credentials. The AccountID is returned in a successful login response.
+* **Client** - a unique client/app to the account. A single account may have many clients.  New clients will generate a request verification PIN OTP.  The clientID is returned in a successful login response.
+* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Information about the Networks and Synch Modules associated with an account is currently returned in the homescreen call.
+
+
+### Authentication
 
 * [Login](auth/login.md) : `POST /api/v4/account/login`
 * [Logout](auth/logout.md) : `POST /api/v4/account/{$AccountID}/client/{$clientID}/logout`
 * Verify Pin : `POST /api/v4/account/${AccountID}/client/{$ClientID}/pin/verify`
 
-## General
 
-* Command Status : `GET /network/{$NetworkID}/command/{$CommandID}`
-* Version : `GET /api/v1/version`
-* Regions : `GET /regions` (?locale=US)
-* Upload Logs : `POST /app/logs/upload`
-* Networks - deprecated?
-* Synch Modules - deprecated?
-* System Health - deprecated?
-* Clients - deprecated? 
-
-## System
+### System
 
 * HomeScreen : `GET /api/v3/accounts/{$AccountID}/homescreen`
-* General Options (app options screen) : `GET /api/v1/accounts/{$AccountID}/clients/{$ClientID}/options`
-* Generic Options Call : `GET /api/v1/account/options`
-* Notification Flags/Config : `GET /api/v1/accounts/{$AccountID}/notifications/configuration`
+* General Client Options : `GET /api/v1/accounts/{$AccountID}/clients/{$ClientID}/options`
+* Get Notification Flags : `GET /api/v1/accounts/{$AccountID}/notifications/configuration`
 * Set Notification Flags : `POST /api/v1/accounts/{$AccountID}/notifications/configuration`
 
-## Network
 
-A Network corresponds to individual Synch modules.  A single account could have multiple networks/modules (e.g. multiple sites/homes)
+### Network
 
-* Arm System (motion detect all cameras in system) : `POST /api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/arm`
+A Network corresponds conceptually to individual Synch modules. A single account could have multiple networks/modules (e.g. multiple sites/homes)
+
+Generally speaking, commands specific to a network are reaching out to your Blink module to issue the commad and wait for a response, these calls are asynchronous and clients must poll to wait for a response via the Command Status call.
+
+* * Command Status : `GET /network/{$NetworkID}/command/{$CommandID}`
+* Arm System : `POST /api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/arm`
 * Disarm System : `POST api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/disarm`
 * List Network Programs : `GET /api/v1/networks/{$NetworkID}/programs`
 * Enable Network Program : `POST /api/v1/networks/{$NetworkID}/programs/{$ProgramID}/enable`
 * Disable Network Program : `POST /api/v1/networks/{$NetworkID}/programs/{$ProgramID}/disable`
 
-## Cameras
+### Cameras
+
+As with Network calls, these calls are sent to your Blink module by Blink's server and are asynchronous - they must be polled for completion with the Command Status call.
+
 * Enable Motion Detection : `POST /network/{$NetworkID}/camera/{$CameraID}/enable`
 * Disable Motion Detection : `POST /network/{$NetworkID}/camera/{$CameraID}/disable`
 * Get Current Thumbnail : `GET /media/production/account/{$AccountID}/network/{$NetworkID}/camera/{$CameraID}/{$JPEG_File_Name}`
@@ -51,15 +57,27 @@ A Network corresponds to individual Synch modules.  A single account could have 
 * Capture Clip - deprecated?
 * Camera Signals (battery, wifi, etc) - deprecated?
 
-## Videos
-* Video Options : `POST /api/v1/account/video_options`
+### Videos
+
+Videos are stored on Blink's servers, therefore they are synchronous and do not have to be polled.
+
 * Get Media events ("changed since" filter) : `GET /api/v1/accounts/{$AccountID}/media/changed` (?since=2020-08-03T16:50:24+0000&page=1) (?since=1970-01-01T00:00:00+0000&page=1)
 * Get Media video clip : `GET /api/v2/accounts/{$AccountID}/media/clip/{$mp4_Filename}`
+* Video Options : `POST /api/v1/account/video_options`
 * Get Network events - deprecated?
 * Paginated list, etc - deprecated?
 
 
+### Misc
 
+* Version : `GET /api/v1/version`
+* Regions : `GET /regions` (?locale=US)
+* Upload Logs : `POST /app/logs/upload`
+* Mystery Options Call : `GET /api/v1/account/options`
+* Networks - deprecated?
+* Synch Modules - deprecated?
+* System Health - deprecated?
+* Clients - deprecated? 
 
 
 
