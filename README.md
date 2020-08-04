@@ -7,70 +7,61 @@ The bootstrap server URL is https://rest-prod.immedia-semi.com - see [Login](aut
 
 ## Authentication
 
-* [Login](authentication.md) : `POST /api/v4/account/login`
-* [Logout](authentication.md) : `POST /api/v4/account/{$AccountID}/client/{$clientID}/logout`
+* [Login](auth/login.md) : `POST /api/v4/account/login`
+* [Logout](auth/logout.md) : `POST /api/v4/account/{$AccountID}/client/{$clientID}/logout`
 * Verify Pin : `POST /api/v4/account/${AccountID}/client/{$ClientID}/pin/verify`
 
 ## General
+
 * Command Status : `GET /network/{$NetworkID}/command/{$CommandID}`
 * Version : `GET /api/v1/version`
 * Regions : `GET /regions` (?locale=US)
-* Upload Logs
+* Upload Logs : `POST /app/logs/upload`
 * Networks - deprecated?
 * Synch Modules - deprecated?
 * System Health - deprecated?
 * Clients - deprecated? 
 
 ## System
-* HomeScreen : `GET /api/v3/accounts/{$AccountID}/homescreen`
-* General Options (app options screen)
-* Generic Options Call
-* Notification Flags/Config
 
-## Network (Synch Module)
-* Arm System (motion detect all cameras in system)
-* Disarm System
+* HomeScreen : `GET /api/v3/accounts/{$AccountID}/homescreen`
+* General Options (app options screen) : `GET /api/v1/accounts/{$AccountID}/clients/{$ClientID}/options`
+* Generic Options Call : `GET /api/v1/account/options`
+* Notification Flags/Config : `GET /api/v1/accounts/{$AccountID}/notifications/configuration`
+* Set Notification Flags : `POST /api/v1/accounts/{$AccountID}/notifications/configuration`
+
+## Network
+
+A Network corresponds to individual Synch modules.  A single account could have multiple networks/modules (e.g. multiple sites/homes)
+
+* Arm System (motion detect all cameras in system) : `POST /api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/arm`
+* Disarm System : `POST api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/disarm`
 * List Network Programs : `GET /api/v1/networks/{$NetworkID}/programs`
-* Enable Network Program
-* Disable Network Program
+* Enable Network Program : `POST /api/v1/networks/{$NetworkID}/programs/{$ProgramID}/enable`
+* Disable Network Program : `POST /api/v1/networks/{$NetworkID}/programs/{$ProgramID}/disable`
 
 ## Cameras
-* Enable Motion Detection
-* Disable Motion Detection
-* Get Current Thumbnail
-* Create New Thumbnail
-* Liveview
-* Get Camera Config
-* Update Camera Config
+* Enable Motion Detection : `POST /network/{$NetworkID}/camera/{$CameraID}/enable`
+* Disable Motion Detection : `POST /network/{$NetworkID}/camera/{$CameraID}/disable`
+* Get Current Thumbnail : `GET /media/production/account/{$AccountID}/network/{$NetworkID}/camera/{$CameraID}/{$JPEG_File_Name}`
+* Create New Thumbnail : `POST /network/{$NetworkID}/camera/${CameraID}/thumbnail`
+* Liveview : `POST /api/v5/accounts/{$AccountID}/networks/{$NetworkID}/cameras/{$CameraID}/liveview`
+* Get Camera Config : `GET /network/{$NetworkID}/camera/{$CameraID}/config`
+* Update Camera Config : `POST /network/{$NetworkID}/camera/{$CameraID}/update`
 * Capture Clip - deprecated?
 * Camera Signals (battery, wifi, etc) - deprecated?
 
 ## Videos
-* Video Options
+* Video Options : `POST /api/v1/account/video_options`
 * Get Media events ("changed since" filter) : `GET /api/v1/accounts/{$AccountID}/media/changed` (?since=2020-08-03T16:50:24+0000&page=1) (?since=1970-01-01T00:00:00+0000&page=1)
+* Get Media video clip : `GET /api/v2/accounts/{$AccountID}/media/clip/{$mp4_Filename}`
 * Get Network events - deprecated?
 * Paginated list, etc - deprecated?
 
 
 
-### Current User related
 
-Each endpoint manipulates or displays information related to the User whose
-Token is provided with the request:
 
-* [Show info](user/get.md) : `GET /api/user/`
-* [Update info](user/put.md) : `PUT /api/user/`
-
-### Account related
-
-Endpoints for viewing and manipulating the Accounts that the Authenticated User
-has permissions to access.
-
-* [Show Accessible Accounts](accounts/get.md) : `GET /api/accounts/`
-* [Create Account](accounts/post.md) : `POST /api/accounts/`
-* [Show An Account](accounts/pk/get.md) : `GET /api/accounts/:pk/`
-* [Update An Account](accounts/pk/put.md) : `PUT /api/accounts/:pk/`
-* [Delete An Account](accounts/pk/delete.md) : `DELETE /api/accounts/:pk/`
 
 ## Login
 
