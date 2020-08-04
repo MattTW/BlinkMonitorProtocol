@@ -7,12 +7,12 @@ Blink/Amazon appears to keep previous versions of APIs running until mobile clie
 
 ## Overview
 
-* The bootstrap server URL:  https://rest-prod.immedia-semi.com
-    * see [Login](authentication.md) for notes on possible redirection to a local server after login.
+* Initial server URL:  https://rest-prod.immedia-semi.com
+    * see [Login](authentication.md) for notes on possible redirection to a locale specific server after login.
 * **Auth Token** - authentication of API calls is done by passing a TOKEN_AUTH header.  The auth token is provided in the response to a successful login.
-* **Account** - An account corresponds single login/credentials. The AccountID is returned in a successful login response.
-* **Client** - a unique client/app to the account. A single account may have many clients.  New clients will generate a request verification PIN OTP.  The clientID is returned in a successful login response.
-* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Information about the Networks and Synch Modules associated with an account is currently returned in the homescreen call.
+* **Account** - An account corresponds to a single set of login credentials. The AccountID is returned in a successful login response.
+* **Client** - a unique client/app to the account. A single account may have many client apps. Clients determined as new by Blink will generate an out of band PIN OTP workflow.  The clientID is returned in a successful login response.
+* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module, which in turn may have one or more cameras associated to it. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Information about the Networks and Synch Modules associated with an account is currently returned in the homescreen call.
 
 
 ### Authentication
