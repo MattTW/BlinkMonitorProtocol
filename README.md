@@ -12,7 +12,8 @@ Blink/Amazon appears to keep previous versions of APIs running until mobile clie
 * **Auth Token** - authentication of API calls is done by passing a TOKEN_AUTH header.  The auth token is provided in the response to a successful login.
 * **Account** - An account corresponds to a single set of login credentials. The AccountID is returned in a successful login response.
 * **Client** - a unique client/app to the account. A single account may have many client apps. Clients determined as new by Blink will generate an out of band PIN OTP workflow.  The clientID is returned in a successful login response.
-* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module, which in turn may have one or more cameras associated to it. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Information about the Networks and Synch Modules associated with an account is currently returned in the homescreen call.
+* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Network ID's and Synch Module information associated with an account is currently returned in the homescreen call.
+* **Camera** A network/synch module may have one or more cameras. Camera ID information is currently returned in the homescreen call.
 
 
 ### Authentication
@@ -36,7 +37,7 @@ A Network corresponds conceptually to individual Synch modules. A single account
 
 Generally speaking, commands specific to a network are reaching out to your Blink module to issue the commad and wait for a response, these calls are asynchronous and clients must poll to wait for a response via the Command Status call.
 
-* * Command Status : `GET /network/{$NetworkID}/command/{$CommandID}`
+* Command Status : `GET /network/{$NetworkID}/command/{$CommandID}`
 * Arm System : `POST /api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/arm`
 * Disarm System : `POST api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/disarm`
 * List Network Programs : `GET /api/v1/networks/{$NetworkID}/programs`
