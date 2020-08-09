@@ -51,8 +51,8 @@ PR's welcome!
 
 ### Cameras
 
-* [Enable Motion Detection](camera/enable.md) : `POST /network/{NetworkID}/camera/{CameraID}/enable` *Note*: No motion detection or video recording will take place unless the system is armed.
-* Disable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/disable`
+* [Enable Motion Detection](camera/enable.md) : `POST /network/{NetworkID}/camera/{CameraID}/enable` 
+* [Disable Motion Detection](camera/disable.md) : `POST /network/{NetworkID}/camera/{CameraID}/disable`
 * [Get Current Thumbnail](camera/getThumbnail.md) : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}.jpg`
 * Create New Thumbnail : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
 * Liveview : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
