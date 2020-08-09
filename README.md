@@ -25,15 +25,15 @@ The Client API is a straightforward REST API using JSON and HTTPS.
 
 ### System
 
-* HomeScreen : `GET /api/v3/accounts/{AccountID}/homescreen`
-* General Client Options : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
-* Get Notification Flags : `GET /api/v1/accounts/{AccountID}/notifications/configuration`
+* [HomeScreen](system/homescreen.md) : `GET /api/v3/accounts/{AccountID}/homescreen`
+* [Get Account Notification Flags](system/getNotifications.md) : `GET /api/v1/accounts/{AccountID}/notifications/configuration`
 * Set Notification Flags : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
+* [General Client Options](system/options.md) : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
 
 
 ### Network
 
-Commands specific to a network are usually reaching out from the Blink servers to your Blink module to issue the commad and wait for a response, these calls are asynchronous and clients must poll to wait for a response via the Command Status call.
+Commands specific to a network generally reach out from the Blink servers to your Blink module to issue the commad and wait for a response - these calls are asynchronous, and clients must poll to wait for a response via the Command Status call.
 
 * Command Status : `GET /network/{NetworkID}/command/{CommandID}`
 * Arm System : `POST /api/v1/accounts/{AccountID}/networks/{NetworkID}/state/arm`

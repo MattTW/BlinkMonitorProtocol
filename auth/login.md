@@ -8,11 +8,12 @@ Client Login to Blink Account on Blink Servers
 
 ### Body
 - **email** - Account userid/email
-- **password** - String Account password
+- **password** - Account password
+- **unique_id** - (optional) UUID generated and identifying the client.  Pass a consistent value here to avoid repeated client verification PIN workflows.
 
 ### Response
 - **account.id** - Account Identifier 
-- **client.id** - Integer Client Identifier
+- **client.id** - Client Identifier
 - **client.verification_required** - Client verification required by Blink Servers, see [Verify Pin](auth/verifyPin.md).
 - **authtoken.authtoken** - String Authentication token to be passed as `TOKEN_AUTH` header in future calls
 - **region** - Region Object (see notes below)
@@ -24,7 +25,7 @@ Depending on where your Blink system is registered, the region object info appea
 
 ### Example Request
 ```sh
-curl 'https://rest-prod.immedia-semi.com/api/v4/account/login' -X POST  -H 'Content-Type: application/json' -d '{"password":"aPassword","email":"anEmail"}'
+curl 'https://rest-prod.immedia-semi.com/api/v4/account/login' -X POST  -H 'Content-Type: application/json' -d '{"unique_id": "00000000-0000-0000-0000-000000000000", "password":"aPassword","email":"anEmail"}'
 ```
 
 
