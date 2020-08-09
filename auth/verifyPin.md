@@ -1,5 +1,5 @@
 ## Verify Pin
-Verify Client with PIN provided in an email.
+Verify Client with PIN provided in an email. Pass a consistent Client UUID at login to avoid needing to do this more than once.
 
 `POST /api/v4/account/{AccountID}/client/{ClientID}/pin/verify`
 
