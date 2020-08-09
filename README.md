@@ -3,7 +3,11 @@ Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monit
 
 The Client API is a straightforward REST API using JSON and HTTPS.
 
-When APIs no longer appear in the current versions of the mobile Apps, we assume they are deprecated and mark them as such in this doc. PR's welcome!
+When APIs no longer appear in the current versions of the mobile Apps, we assume they are deprecated and mark them as such in this doc.
+
+When Blink obsoletes an API, they do not remove it, but return the message "An app update is required".  This presumably triggers logic in the mobile clients to users that they must update to a more current version of the client to restore functionality.
+
+PR's welcome!
 
 
 ## Overview
@@ -54,9 +58,9 @@ When APIs no longer appear in the current versions of the mobile Apps, we assume
 * Liveview : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
 * Get Camera Config : `GET /network/{NetworkID}/camera/{CameraID}/config`
 * Update Camera Config : `POST /network/{NetworkID}/camera/{CameraID}/update`
-* Get Camera List (deprecated? - replaced by HomeScreen) - `GET /network/{NetworkID}/cameras`
+* ~~Get Camera List (obsolete - replaced by HomeScreen) - `GET /network/{NetworkID}/cameras`~~
 * Get Camera Info (deprecated? - replaced by HomeScreen) - `GET /network/{NetworkID}/camera/{CameraID}`
-* Get Camera Sensor Info (deprecated? - replaced by HomeScreen) - `GET /network/{NetworkID}/camera/{CameraID/signals`
+* Get Camera Sensor Info (deprecated? - replaced by HomeScreen) - `GET /network/{NetworkID}/camera/{CameraID}/signals`
 
 
 ### Videos
@@ -66,13 +70,12 @@ When APIs no longer appear in the current versions of the mobile Apps, we assume
 * Get Video Thumbnail:  
 * Set Video Thumbnail: 
 * Set Video Options : `POST /api/v1/account/video_options`
-* Get Network events (deprecated? replaced by Get Video Events) - `GET /events/network/{NetworkID}`
-* Get Video Count (deprecated?) - `GET /api/v2/videos/count`
-* Get Video Info by Page (deprecated?) - `GET /api/v2/videos/page/{PageNumber}`
-* Get Video by ID (deprecated?) - `GET /api/v2/video/{VideoID}`
-* Get Unwatched Videos (deprecated?) - `GET /api/v2/videos/unwatched`
-* Delete a Video (deprecated?) - `GET /api/v2/video/{VideoID}/delete`
-* Delete all Videos (deprecated?) - `GET /api/v2/videos/deleteall`
+* ~~Get Network events (obsolete replaced by Get Video Events) - `GET /events/network/{NetworkID}`~~
+* ~~Get Video Count (obsolete) - `GET /api/v2/videos/count`~~
+* ~~Get Video Info by Page (obsolete) - `GET /api/v2/videos/page/{PageNumber}`~~
+* ~~Get Video by ID (obsolete) - `GET /api/v2/video/{VideoID}`~~
+* ~~Get Unwatched Videos (obsolete) - `GET /api/v2/videos/unwatched`~~
+* ~~Delete a Video (obsolete) - `POST /api/v2/video/{VideoID}/delete`~~
 
 
 ### Misc
@@ -81,5 +84,5 @@ When APIs no longer appear in the current versions of the mobile Apps, we assume
 * [Get Regions](Misc/regions.md) : `GET /regions?locale={Two Character Country Locale}`
 * Upload Logs : `POST /app/logs/upload`
 * [Account Options](Misc/accountOptions.md) : `GET /api/v1/account/options`
-* System Health (deprecated?) `GET /health`
-* Clients (deprecated?) `GET /account/clients`
+* System Health (deprecated?) :  `GET /health`
+* ~~Clients (obsolete) : `GET /account/clients`~~
