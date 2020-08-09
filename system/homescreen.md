@@ -1,4 +1,4 @@
-## Login
+## Home Screen
 Retrieve Client "home screen" data.  Returns detailed information about the Account including Network, Synch Module, and Camera Info.
 
 `GET /api/v3/accounts/{AccountID}/homescreen`
