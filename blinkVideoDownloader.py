@@ -1,5 +1,5 @@
-# Credit protocol information from https://github.com/MattTW/BlinkMonitorProtocol
-
+# A simple example to demonstrate the protocol:
+# Download available videos
 import requests
 import shutil
 import os
