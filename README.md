@@ -1,60 +1,58 @@
 # BlinkMonitorProtocol
-Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System.
+Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System. I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**. 
 
-I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**. 
+When APIs no longer appear in the current versions of the mobile Apps, we assume they are deprecated and mark them as such in this doc. PR's welcome!
 
-Blink/Amazon appears to keep previous versions of APIs running until mobile clients are forced to upgrade - APIs can and have been obsoleted.  As unofficial doc, we get no deprecation warning.  When APIs no longer appear in the current versions of the mobile Apps, we assume they are deprecated and mark them as such in this doc. PR's welcome!  
+The Client API is a straightforward REST API using JSON and HTTPS.
 
 ## Overview
 
-* Initial server URL:  https://rest-prod.immedia-semi.com
-    * see [Login](authentication.md) for notes on possible redirection to a locale specific server after login.
-* **Auth Token** - authentication of API calls is done by passing a TOKEN_AUTH header.  The auth token is provided in the response to a successful login.
-* **Account** - An account corresponds to a single set of login credentials. The AccountID is returned in a successful login response.
-* **Client** - a unique client/app to the account. A single account may have many client apps. Clients determined as new by Blink will generate an out of band PIN OTP workflow.  The clientID is returned in a successful login response.
-* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Network ID's and Synch Module information associated with an account is currently returned in the homescreen call.
-* **Camera** A network/synch module may have one or more cameras. Camera ID information is currently returned in the homescreen call.
+* **Initial server URL** - https://rest-prod.immedia-semi.com
+    * see [Login](auth/login.md) for notes on possible redirection to a locale specific server after login.
+* **Auth Token** - Authentication is done by passing a TOKEN_AUTH header.  The auth token is provided in the response to a successful login.
+* **Account** - An account corresponds to a single set of login credentials. The Account ID is returned in a successful login response.
+* **Client** - A unique client/app to the account. A single account may have many client apps. Clients that the Blink servers believe are new will generate an out-of-band PIN OTP workflow.  The Client ID is returned in a successful login response.
+* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Network ID's and Synch Module information associated with an account is returned in the homescreen call.
+* **Camera** - A network/synch module may have one or more cameras. Camera ID information is returned in the homescreen call.
 
 
 ### Authentication
 
 * [Login](auth/login.md) : `POST /api/v4/account/login`
-* [Logout](auth/logout.md) : `POST /api/v4/account/{$AccountID}/client/{$clientID}/logout`
-* Verify Pin : `POST /api/v4/account/${AccountID}/client/{$ClientID}/pin/verify`
+* [Logout](auth/logout.md) : `POST /api/v4/account/{AccountID}/client/{clientID}/logout`
+* [Verify Pin](auth/verifyPin.md) : `POST /api/v4/account/{AccountID}/client/{ClientID}/pin/verify`
 
 
 ### System
 
-* HomeScreen : `GET /api/v3/accounts/{$AccountID}/homescreen`
-* General Client Options : `GET /api/v1/accounts/{$AccountID}/clients/{$ClientID}/options`
-* Get Notification Flags : `GET /api/v1/accounts/{$AccountID}/notifications/configuration`
-* Set Notification Flags : `POST /api/v1/accounts/{$AccountID}/notifications/configuration`
+* HomeScreen : `GET /api/v3/accounts/{AccountID}/homescreen`
+* General Client Options : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
+* Get Notification Flags : `GET /api/v1/accounts/{AccountID}/notifications/configuration`
+* Set Notification Flags : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
 
 
 ### Network
 
-A Network corresponds conceptually to individual Synch modules. A single account could have multiple networks/modules (e.g. multiple sites/homes)
+Commands specific to a network are usually reaching out from the Blink servers to your Blink module to issue the commad and wait for a response, these calls are asynchronous and clients must poll to wait for a response via the Command Status call.
 
-Generally speaking, commands specific to a network are reaching out to your Blink module to issue the commad and wait for a response, these calls are asynchronous and clients must poll to wait for a response via the Command Status call.
-
-* Command Status : `GET /network/{$NetworkID}/command/{$CommandID}`
-* Arm System : `POST /api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/arm`
-* Disarm System : `POST api/v1/accounts/{$AccountID}/networks/{$NetworkID}/state/disarm`
-* List Network Programs : `GET /api/v1/networks/{$NetworkID}/programs`
-* Enable Network Program : `POST /api/v1/networks/{$NetworkID}/programs/{$ProgramID}/enable`
-* Disable Network Program : `POST /api/v1/networks/{$NetworkID}/programs/{$ProgramID}/disable`
+* Command Status : `GET /network/{NetworkID}/command/{CommandID}`
+* Arm System : `POST /api/v1/accounts/{AccountID}/networks/{NetworkID}/state/arm`
+* Disarm System : `POST api/v1/accounts/{AccountID}/networks/{NetworkID}/state/disarm`
+* List Network Programs : `GET /api/v1/networks/{NetworkID}/programs`
+* Enable Network Program : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
+* Disable Network Program : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/disable`
 
 ### Cameras
 
-As with Network calls, these calls are sent to your Blink module by Blink's server and are asynchronous - they must be polled for completion with the Command Status call.
+As with Network calls, these calls are sent to your Blink module by Blink's servers and are asynchronous - they must be polled for completion with the Command Status call.
 
-* Enable Motion Detection : `POST /network/{$NetworkID}/camera/{$CameraID}/enable`
-* Disable Motion Detection : `POST /network/{$NetworkID}/camera/{$CameraID}/disable`
-* Get Current Thumbnail : `GET /media/production/account/{$AccountID}/network/{$NetworkID}/camera/{$CameraID}/{$JPEG_File_Name}`
-* Create New Thumbnail : `POST /network/{$NetworkID}/camera/${CameraID}/thumbnail`
-* Liveview : `POST /api/v5/accounts/{$AccountID}/networks/{$NetworkID}/cameras/{$CameraID}/liveview`
-* Get Camera Config : `GET /network/{$NetworkID}/camera/{$CameraID}/config`
-* Update Camera Config : `POST /network/{$NetworkID}/camera/{$CameraID}/update`
+* Enable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/enable`
+* Disable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/disable`
+* Get Current Thumbnail : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}`
+* Create New Thumbnail : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
+* Liveview : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
+* Get Camera Config : `GET /network/{NetworkID}/camera/{CameraID}/config`
+* Update Camera Config : `POST /network/{NetworkID}/camera/{CameraID}/update`
 * Capture Clip - deprecated?
 * Camera Signals (battery, wifi, etc) - deprecated?
 
@@ -62,8 +60,8 @@ As with Network calls, these calls are sent to your Blink module by Blink's serv
 
 Videos are stored on Blink's servers, therefore they are synchronous and do not have to be polled.
 
-* Get Media events ("changed since" filter) : `GET /api/v1/accounts/{$AccountID}/media/changed` (?since=2020-08-03T16:50:24+0000&page=1) (?since=1970-01-01T00:00:00+0000&page=1)
-* Get Media video clip : `GET /api/v2/accounts/{$AccountID}/media/clip/{$mp4_Filename}`
+* Get Media events ("changed since" filter) : `GET /api/v1/accounts/{AccountID}/media/changed` (?since=2020-08-03T16:50:24+0000&page=1) (?since=1970-01-01T00:00:00+0000&page=1)
+* Get Media video clip : `GET /api/v2/accounts/{AccountID}/media/clip/{mp4_Filename}`
 * Video Options : `POST /api/v1/account/video_options`
 * Get Network events - deprecated?
 * Paginated list, etc - deprecated?
@@ -81,30 +79,6 @@ Videos are stored on Blink's servers, therefore they are synchronous and do not 
 * Clients - deprecated? 
 
 
-
-## Login
-
-Client login to the Blink Servers.
-
-**Request:**
->curl -H "Host: prod.immedia-semi.com" -H "Content-Type: application/json" --data-binary '{
->  "password" : "*your blink password*",
->  "client_specifier" : "iPhone 9.2 | 2.2 | 222",
->  "email" : "*your blink login/email*"
->}' --compressed https://rest-prod.immedia-semi.com/api/v4/account/login
-
-**Response:**
->{ "account": { "id": "*an account number*" },
-"client": { "id" : "*a client id*" },
-"authtoken":{"authtoken":"*an auth token*","message":"auth"},"networks":{"*network id*":{"name":"*name*","onboarded":true}},"region":{"*regioncode for endpoint*":"*region name"}}
-
-**Notes:**
-The authtoken value is passed in a header in future calls.
-The region code for endpoint is required to form the URL of the REST endpoint for future calls.
-Depending on the region you are registered you will need to change the REST endpoints below:
-- from `https://rest.prod.immedia-semi.com`
-- to `https://rest.prde.immedia-semi.com` if e.g. your device is registered in Germany
-Please note that at this moment it seems that all regions are not implemented equally: not all endpoints are available in all regions
 
 ## Networks
 
