@@ -76,9 +76,9 @@ The Client API is a straightforward REST API using JSON and HTTPS.
 
 ### Misc
 
-* [App Version Check](misc/version.md) : `GET /api/v1/version`
-* [Get Regions](misc/regions.md) : `GET /regions?locale={Two Character Country Locale}`
+* [App Version Check](Misc/version.md) : `GET /api/v1/version`
+* [Get Regions](Misc/regions.md) : `GET /regions?locale={Two Character Country Locale}`
 * Upload Logs : `POST /app/logs/upload`
-* [Account Options](misc/accountOptions.md) : `GET /api/v1/account/options`
+* [Account Options](Misc/accountOptions.md) : `GET /api/v1/account/options`
 * System Health (deprecated?) `GET /health`
 * Clients (deprecated?) `GET /account/clients`
