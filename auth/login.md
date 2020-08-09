@@ -9,12 +9,12 @@ Client Login to Blink Account on Blink Servers
 ### Body
 - **email** - Account userid/email
 - **password** - Account password
-- **unique_id** - (optional) UUID generated and identifying the client.  Pass a consistent value here to avoid repeated client verification PIN workflows.
+- **unique_id** - (optional) UUID generated and identifying the client.  Pass a consistent value here to avoid repeated client verification PIN requests.
 
 ### Response
-- **account.id** - Account Identifier 
-- **client.id** - Client Identifier
-- **client.verification_required** - Client verification required by Blink Servers, see [Verify Pin](auth/verifyPin.md).
+- **account&#46;id** - Account Identifier 
+- **client&#46;id** - Client Identifier
+- **client.verification_required** - Client verification required by Blink Servers, see [Verify Pin](verifyPin.md).
 - **authtoken.authtoken** - String Authentication token to be passed as `TOKEN_AUTH` header in future calls
 - **region** - Region Object (see notes below)
 

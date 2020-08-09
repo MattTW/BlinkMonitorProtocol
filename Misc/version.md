@@ -1,5 +1,5 @@
 ## App Version Check
-Determine if a new version of the official client is available.  This call does not require authentiation.
+Determine if a new version of the official client is available.  This call does not require authentiation.  This information is also returned in the [HomeScreen](../system/homesceen.md) call.
 
 `GET /api/v1/version`
 
