@@ -40,36 +40,45 @@ The Client API is a straightforward REST API using JSON and HTTPS.
 * [List Schedules](network/listPrograms.md) : `GET /api/v1/networks/{NetworkID}/programs`
 * Enable Network Program : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
 * Disable Network Program : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/disable`
+* List Networks (deprecated? - replaced by HomeScreen): `GET /networks`
+* List Synch Modules (deprecated? - replaced by HomeScreen) `GET /network/{NetworkID}/syncmodules`
+
 
 ### Cameras
 
-* Enable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/enable`
+* Enable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/enable` *Note*: No motion detection or video recording will take place unless the system is armed.
 * Disable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/disable`
 * [Get Current Thumbnail](camera/getThumbnail.md) : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}.jpg`
 * Create New Thumbnail : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
 * Liveview : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
 * Get Camera Config : `GET /network/{NetworkID}/camera/{CameraID}/config`
 * Update Camera Config : `POST /network/{NetworkID}/camera/{CameraID}/update`
-* Capture Clip - deprecated?
-* Camera Signals (battery, wifi, etc) - deprecated?
+* Get Camera List (deprecated? - replaced by HomeScreen) - `GET /network/{NetworkID}/cameras`
+* Get Camera Info (deprecated? - replaced by HomeScreen) - `GET /network/{NetworkID}/camera/{CameraID}`
+* Get Camera Sensor Info (deprecated? - replaced by HomeScreen) - `GET /network/{NetworkID}/camera/{CameraID/signals`
+
 
 ### Videos
 
 * [Get Video Events](videos/getVideoEvents.md) : `GET /api/v1/accounts/{AccountID}/media/changed?since={timestamp}&page={PageNumber}`
 * Get Video : `GET /api/v2/accounts/{AccountID}/media/clip/{mp4_Filename}`
-* Get Video Thumbnaail:  
-* Video Options : `POST /api/v1/account/video_options`
-* Get Network events - deprecated?
-* Paginated list, etc - deprecated?
+* Get Video Thumbnail:  
+* Set Video Thumbnail: 
+* Set Video Options : `POST /api/v1/account/video_options`
+* Get Network events (deprecated? replaced by Get Video Events) - `GET /events/network/{NetworkID}`
+* Get Video Count (deprecated?) - `GET /api/v2/videos/count`
+* Get Video Info by Page (deprecated?) - `GET /api/v2/videos/page/{PageNumber}`
+* Get Video by ID (deprecated?) - `GET /api/v2/video/{VideoID}`
+* Get Unwatched Videos (deprecated?) - `GET /api/v2/videos/unwatched`
+* Delete a Video (deprecated?) - `GET /api/v2/video/{VideoID}/delete`
+* Delete all Videos (deprecated?) - `GET /api/v2/videos/deleteall`
 
 
 ### Misc
 
-* Version : `GET /api/v1/version`
-* Regions : `GET /regions` (?locale=US)
+* [App Version Check](misc/version.md) : `GET /api/v1/version`
+* [Get Regions](misc/regions.md) : `GET /regions?locale={Two Character Country Locale}`
 * Upload Logs : `POST /app/logs/upload`
-* Mystery Options Call : `GET /api/v1/account/options`
-* Networks - deprecated?
-* Synch Modules - deprecated?
-* System Health - deprecated?
-* Clients - deprecated? 
+* [Account Options](misc/accountOptions.md) : `GET /api/v1/account/options`
+* System Health (deprecated?) `GET /health`
+* Clients (deprecated?) `GET /account/clients`
