@@ -1,9 +1,10 @@
 # BlinkMonitorProtocol
 Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System. I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**. 
 
+The Client API is a straightforward REST API using JSON and HTTPS.
+
 When APIs no longer appear in the current versions of the mobile Apps, we assume they are deprecated and mark them as such in this doc. PR's welcome!
 
-The Client API is a straightforward REST API using JSON and HTTPS.
 
 ## Overview
 
@@ -12,8 +13,8 @@ The Client API is a straightforward REST API using JSON and HTTPS.
 * **Auth Token** - Authentication is done by passing a TOKEN_AUTH header.  The auth token is provided in the response to a successful login.
 * **Account** - An account corresponds to a single set of login credentials. The Account ID is returned in a successful login response.
 * **Client** - A unique client/app to the account. A single account may have many client apps. Clients that the Blink servers believe are new will generate an out-of-band PIN OTP workflow.  The Client ID is returned in a successful login response.
-* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Network ID's and Synch Module information associated with an account is returned in the homescreen call.
-* **Camera** - A network/synch module may have one or more cameras. Camera ID information is returned in the homescreen call.
+* **Network** - A single account may have many networks. A network corresponds conceptually to a Blink Synch module. An account could have multiple networks/synch modules - e.g. multiple sites/homes. Network and Synch Module information associated with an account is returned in the homescreen call.
+* **Camera** - A network (synch module) may have one or more cameras. Camera information is returned in the homescreen call.
 * **Command** - Some operations reach out from the Blink Servers to your local Blink module.  These operations are asynchronous and return a Command ID to be polled for completion via the Command Status call.
 
 
@@ -60,7 +61,7 @@ The Client API is a straightforward REST API using JSON and HTTPS.
 
 ### Videos
 
-* [Get Video Events](videos/getVideoEvents.md) : `GET /api/v1/accounts/{AccountID}/media/changed?since={timestamp}&page={PageNumber}`
+* [Get Video Events](video/getVideoEvents.md) : `GET /api/v1/accounts/{AccountID}/media/changed?since={timestamp}&page={PageNumber}`
 * Get Video : `GET /api/v2/accounts/{AccountID}/media/clip/{mp4_Filename}`
 * Get Video Thumbnail:  
 * Set Video Thumbnail: 
