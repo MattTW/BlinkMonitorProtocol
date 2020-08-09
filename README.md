@@ -33,17 +33,17 @@ PR's welcome!
 
 * [HomeScreen](system/homescreen.md) : `GET /api/v3/accounts/{AccountID}/homescreen`
 * [Get Account Notification Flags](system/getNotifications.md) : `GET /api/v1/accounts/{AccountID}/notifications/configuration`
-* Set Notification Flags : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
+* [Set Notification Flags](system.setNotifications.md) : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
 * [General Client Options](system/options.md) : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
 
 
 ### Network
 
-* Command Status : `GET /network/{NetworkID}/command/{CommandID}`
+* [Command Status](network/command.md) : `GET /network/{NetworkID}/command/{CommandID}`
 * Arm System : `POST /api/v1/accounts/{AccountID}/networks/{NetworkID}/state/arm`
 * Disarm System : `POST api/v1/accounts/{AccountID}/networks/{NetworkID}/state/disarm`
 * [List Schedules](network/listPrograms.md) : `GET /api/v1/networks/{NetworkID}/programs`
-* Enable Network Program : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
+* [Enable Schedule](network/enableProgram.md) : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
 * Disable Network Program : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/disable`
 * List Networks (deprecated? - replaced by HomeScreen): `GET /networks`
 * List Synch Modules (deprecated? - replaced by HomeScreen) `GET /network/{NetworkID}/syncmodules`
@@ -51,7 +51,7 @@ PR's welcome!
 
 ### Cameras
 
-* Enable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/enable` *Note*: No motion detection or video recording will take place unless the system is armed.
+* [Enable Motion Detection](camera/enable.md) : `POST /network/{NetworkID}/camera/{CameraID}/enable` *Note*: No motion detection or video recording will take place unless the system is armed.
 * Disable Motion Detection : `POST /network/{NetworkID}/camera/{CameraID}/disable`
 * [Get Current Thumbnail](camera/getThumbnail.md) : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}.jpg`
 * Create New Thumbnail : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
@@ -86,3 +86,9 @@ PR's welcome!
 * [Account Options](Misc/accountOptions.md) : `GET /api/v1/account/options`
 * System Health (deprecated?) :  `GET /health`
 * ~~Clients (obsolete) : `GET /account/clients`~~
+
+
+### Implementations
+
+* [BlinkPy - A Python library for the Blink Camera system](https://github.com/fronzbot/blinkpy)
+* [node-blink-security - A node.js implementation](https://github.com/madshall/node-blink-security)
