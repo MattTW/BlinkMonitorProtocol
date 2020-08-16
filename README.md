@@ -34,17 +34,19 @@ PR's welcome!
 * [HomeScreen](system/homescreen.md) : `GET /api/v3/accounts/{AccountID}/homescreen`
 * [Get Account Notification Flags](system/getNotifications.md) : `GET /api/v1/accounts/{AccountID}/notifications/configuration`
 * [Set Notification Flags](system.setNotifications.md) : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
-* [General Client Options](system/options.md) : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
+* [Get Client Options](system/options.md) : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
+* Set Client Options : `POST /client/{ClientID}/update`
 
 
 ### Network
 
 * [Command Status](network/command.md) : `GET /network/{NetworkID}/command/{CommandID}`
-* Arm System : `POST /api/v1/accounts/{AccountID}/networks/{NetworkID}/state/arm`
-* Disarm System : `POST api/v1/accounts/{AccountID}/networks/{NetworkID}/state/disarm`
+* [Arm System](network/arm.md) : `POST /api/v1/accounts/{AccountID}/networks/{NetworkID}/state/arm`
+* [Disarm System](network/disarm.md) : `POST api/v1/accounts/{AccountID}/networks/{NetworkID}/state/disarm`
 * [List Schedules](network/listPrograms.md) : `GET /api/v1/networks/{NetworkID}/programs`
 * [Enable Schedule](network/enableProgram.md) : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
-* Disable Network Program : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/disable`
+* Disable Schedule : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/disable`
+* Update Schedule : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID/update`
 * List Networks (deprecated? - replaced by HomeScreen): `GET /networks`
 * List Synch Modules (deprecated? - replaced by HomeScreen) `GET /network/{NetworkID}/syncmodules`
 
@@ -56,6 +58,7 @@ PR's welcome!
 * [Get Current Thumbnail](camera/getThumbnail.md) : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}.jpg`
 * Create New Thumbnail : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
 * Liveview : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
+* Record Video Clip from Camera (deprecated?) : `POST /network/{NetworkID}/camera/{CameraID}/clip
 * Get Camera Config : `GET /network/{NetworkID}/camera/{CameraID}/config`
 * Update Camera Config : `POST /network/{NetworkID}/camera/{CameraID}/update`
 * ~~Get Camera List (obsolete - replaced by HomeScreen) - `GET /network/{NetworkID}/cameras`~~
@@ -67,9 +70,9 @@ PR's welcome!
 
 * [Get Video Events](video/getVideoEvents.md) : `GET /api/v1/accounts/{AccountID}/media/changed?since={timestamp}&page={PageNumber}`
 * Get Video : `GET /api/v2/accounts/{AccountID}/media/clip/{mp4_Filename}`
-* Get Video Thumbnail:  
-* Set Video Thumbnail: 
+* Get Video Thumbnail : `GET /api/v2/accounts/{AccountID}/media/thumb/{jpg_filename}`
 * Set Video Options : `POST /api/v1/account/video_options`
+* Delete Videos : `POST /api/v1/accounts/{AccountID}/media/delete`
 * ~~Get Network events (obsolete replaced by Get Video Events) - `GET /events/network/{NetworkID}`~~
 * ~~Get Video Count (obsolete) - `GET /api/v2/videos/count`~~
 * ~~Get Video Info by Page (obsolete) - `GET /api/v2/videos/page/{PageNumber}`~~
