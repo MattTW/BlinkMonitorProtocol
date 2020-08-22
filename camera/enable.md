@@ -63,5 +63,3 @@ curl --request POST \
   "sync_module_id": 123456
 }
 
-
-

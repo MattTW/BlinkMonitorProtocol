@@ -35,7 +35,7 @@ PR's welcome!
 * [Get Account Notification Flags](system/getNotifications.md) : `GET /api/v1/accounts/{AccountID}/notifications/configuration`
 * [Set Notification Flags](system.setNotifications.md) : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
 * [Get Client Options](system/options.md) : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
-* Set Client Options : `POST /client/{ClientID}/update`
+* [Set Client Options](system/updateoptions.md) : `POST /client/{ClientID}/update`
 
 
 ### Network
@@ -46,7 +46,7 @@ PR's welcome!
 * [List Schedules](network/listPrograms.md) : `GET /api/v1/networks/{NetworkID}/programs`
 * [Enable Schedule](network/enableProgram.md) : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
 * Disable Schedule : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/disable`
-* Update Schedule : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID/update`
+* [Update Schedule](network/updateProgram.md) : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID/update`
 * List Networks (deprecated? - replaced by HomeScreen): `GET /networks`
 * List Synch Modules (deprecated? - replaced by HomeScreen) `GET /network/{NetworkID}/syncmodules`
 
@@ -56,8 +56,8 @@ PR's welcome!
 * [Enable Motion Detection](camera/enable.md) : `POST /network/{NetworkID}/camera/{CameraID}/enable` 
 * [Disable Motion Detection](camera/disable.md) : `POST /network/{NetworkID}/camera/{CameraID}/disable`
 * [Get Current Thumbnail](camera/getThumbnail.md) : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}.jpg`
-* Create New Thumbnail : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
-* Liveview : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
+* [Create New Thumbnail](camera/setThumbnail.md) : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
+* [Liveview](camera/liveview.md) : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
 * Record Video Clip from Camera (deprecated?) : `POST /network/{NetworkID}/camera/{CameraID}/clip
 * Get Camera Config : `GET /network/{NetworkID}/camera/{CameraID}/config`
 * Update Camera Config : `POST /network/{NetworkID}/camera/{CameraID}/update`

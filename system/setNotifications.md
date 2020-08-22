@@ -6,6 +6,8 @@
 - **Content-Type** - `application/json`
 - **TOKEN-AUTH** -  session auth token
 
+### Body
+- **notification object** - see example request
 
 ### Response
 see example

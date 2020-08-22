@@ -1,5 +1,5 @@
 ## Client Options
-Purpose Unknown
+Get client specific options.   Details unknown.
 
 `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
 
