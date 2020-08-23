@@ -47,8 +47,8 @@ PR's welcome!
 * [Enable Schedule](network/enableProgram.md) : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
 * Disable Schedule : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/disable`
 * [Update Schedule](network/updateProgram.md) : `POST /api/v1/networks/{NetworkID}/programs/{ProgramID/update`
-* List Networks (deprecated? - replaced by HomeScreen): `GET /networks`
-* List Synch Modules (deprecated? - replaced by HomeScreen) `GET /network/{NetworkID}/syncmodules`
+* ~~List Networks (obsolete): `GET /networks`~~
+* ~~List Synch Modules (obsolete) `GET /network/{NetworkID}/syncmodules`~~
 
 
 ### Cameras
@@ -58,7 +58,7 @@ PR's welcome!
 * [Get Current Thumbnail](camera/getThumbnail.md) : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}.jpg`
 * [Create New Thumbnail](camera/setThumbnail.md) : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
 * [Liveview](camera/liveview.md) : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
-* Record Video Clip from Camera (deprecated?) : `POST /network/{NetworkID}/camera/{CameraID}/clip
+* [Record Video Clip from Camera](camera/recordClip.md) : `POST /network/{NetworkID}/camera/{CameraID}/clip`
 * Get Camera Config : `GET /network/{NetworkID}/camera/{CameraID}/config`
 * Update Camera Config : `POST /network/{NetworkID}/camera/{CameraID}/update`
 * ~~Get Camera List (obsolete - replaced by HomeScreen) - `GET /network/{NetworkID}/cameras`~~
