@@ -1,5 +1,5 @@
 # BlinkMonitorProtocol
-Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System. I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**. 
+Unofficial documentation for the Client API of the Blink Wire-Free HD Home Monitoring &amp; Alert System. I am not affiliated with the company in any way - this documentation is strictly **"AS-IS"**.
 
 The Client API is a straightforward REST API using JSON and HTTPS.
 
@@ -24,7 +24,7 @@ PR's welcome!
 
 ### Authentication
 
-* [Login](auth/login.md) : `POST /api/v4/account/login`
+* [Login](auth/login.md) : `POST /api/v5/account/login`
 * [Logout](auth/logout.md) : `POST /api/v4/account/{AccountID}/client/{clientID}/logout`
 * [Verify Pin](auth/verifyPin.md) : `POST /api/v4/account/{AccountID}/client/{ClientID}/pin/verify`
 
@@ -53,7 +53,7 @@ PR's welcome!
 
 ### Cameras
 
-* [Enable Motion Detection](camera/enable.md) : `POST /network/{NetworkID}/camera/{CameraID}/enable` 
+* [Enable Motion Detection](camera/enable.md) : `POST /network/{NetworkID}/camera/{CameraID}/enable`
 * [Disable Motion Detection](camera/disable.md) : `POST /network/{NetworkID}/camera/{CameraID}/disable`
 * [Get Current Thumbnail](camera/getThumbnail.md) : `GET /media/production/account/{AccountID}/network/{NetworkID}/camera/{CameraID}/{JPEG_File_Name}.jpg`
 * [Create New Thumbnail](camera/setThumbnail.md) : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
