@@ -10,6 +10,7 @@ Client Login to Blink Account on Blink Servers
 - **email** - Account userid/email
 - **password** - Account password
 - **unique_id** - (optional) UUID generated and identifying the client.  Pass a consistent value here to avoid repeated client verification PIN requests.
+- **reauth** - (optional) Should be set to *true* to, if the client is already [verified](verifyPin.md). Otherwise blink keeps sending verification PINs.
 
 ### Response
 - **account&#46;account_id** - Account Identifier 
