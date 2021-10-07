@@ -33,7 +33,7 @@ PR's welcome!
 
 * [HomeScreen](system/homescreen.md) : `GET /api/v3/accounts/{AccountID}/homescreen`
 * [Get Account Notification Flags](system/getNotifications.md) : `GET /api/v1/accounts/{AccountID}/notifications/configuration`
-* [Set Notification Flags](system.setNotifications.md) : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
+* [Set Notification Flags](system/setNotifications.md) : `POST /api/v1/accounts/{AccountID}/notifications/configuration`
 * [Get Client Options](system/options.md) : `GET /api/v1/accounts/{AccountID}/clients/{ClientID}/options`
 * [Set Client Options](system/updateoptions.md) : `POST /client/{ClientID}/update`
 
