@@ -9,8 +9,9 @@ Client Login to Blink Account on Blink Servers
 ### Body
 - **email** - Account userid/email
 - **password** - Account password
-- **unique_id** - (optional) UUID generated and identifying the client.  Pass a consistent value here to avoid repeated client verification PIN requests.
-- **reauth** - (optional) Should be set to *true* to, if the client is already [verified](verifyPin.md). Otherwise blink keeps sending verification PINs.
+- **unique_id** - (optional) UUID generated and identifying the client.  Pass a consistent value here to avoid repeated client verification PIN requests. This format is something like NAME_00000000-0000-0000-0000-000000000000 (0s must be replaced by a Hex number)
+- **client_name** - (optional) Display name in the blink app of the client
+- **reauth** - (optional) Should be set to *true* to, if the client is already [verified](verifyPin.md). Otherwise blink keeps sending verification PINs. If you want to reauth, you must include the unique_id in the request and set reauth parameter to 'true' (string). With this call, you will receive a new token that will work for 24 hours.
 
 ### Response
 - **account&#46;account_id** - Account Identifier 
@@ -70,3 +71,4 @@ curl 'https://rest-prod.immedia-semi.com/api/v5/account/login' -X POST  -H 'Cont
     "allow_pin_resend_seconds": 60
 }
 ```
+
