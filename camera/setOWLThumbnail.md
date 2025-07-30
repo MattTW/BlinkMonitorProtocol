@@ -2,7 +2,7 @@
 
 Set the thumbail by taking a snapshot of the current view of the camera.
 
-`POST /api/v1/accounts/{accountID}/networks/{NetworkID}/owls/{CameraID}/thumbnail'
+`POST /api/v1/accounts/{accountID}/networks/{NetworkID}/owls/{CameraID}/thumbnail`
 
 /network/{NetworkID}/camera/{CameraID}/thumbnail`
 
