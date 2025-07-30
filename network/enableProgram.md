@@ -2,7 +2,7 @@
 
 Enable an existing schedule (programs) defined for the given Network/Blink Module
 
-POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable
+`POST /api/v1/networks/{NetworkID}/programs/{ProgramID}/enable`
 
 ### Headers
 - **TOKEN-AUTH** -  session auth token

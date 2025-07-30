@@ -2,7 +2,7 @@
 
 Update an existing schedule
 
-POST /api/v1/networks/{NetworkID}/programs/{ProgramID/update
+`POST /api/v1/networks/{NetworkID}/programs/{ProgramID/update`
 
 ### Headers
 - **TOKEN-AUTH** -  session auth token

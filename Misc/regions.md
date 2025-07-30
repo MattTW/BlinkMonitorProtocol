@@ -1,7 +1,7 @@
 ## Get Regions
 Get valid region info for a locale. Authentication is not required.  Specific use for results is unknown.
 
-`GET /api/v1/version`
+`GET /regions`
 
 ### Parameter
 - **locale** -  A Two Character country code e.g. `US`
