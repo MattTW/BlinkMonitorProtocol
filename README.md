@@ -59,6 +59,7 @@ PR's welcome!
 * [Create New Thumbnail](camera/setThumbnail.md) : `POST /network/{NetworkID}/camera/{CameraID}/thumbnail`
 * [Liveview](camera/liveview.md) : `POST /api/v5/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/liveview`
 * [Record Video Clip from Camera](camera/recordClip.md) : `POST /network/{NetworkID}/camera/{CameraID}/clip`
+* [Snooze Camera](camera/snooze.md) : `POST /api/v1/accounts/{AccountID}/networks/{NetworkID}/cameras/{CameraID}/snooze`
 * Get Camera Config : `GET /network/{NetworkID}/camera/{CameraID}/config`
 * Update Camera Config : `POST /network/{NetworkID}/camera/{CameraID}/update`
 * ~~Get Camera List (obsolete - replaced by HomeScreen) - `GET /network/{NetworkID}/cameras`~~
